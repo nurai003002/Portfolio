@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class MyInformation(models.Model):
+class   MyInformation(models.Model):
     first_name = models.CharField(
         max_length=100,
         verbose_name='Имя'
@@ -9,6 +9,10 @@ class MyInformation(models.Model):
     last_name = models.CharField(
         max_length=100,
         verbose_name='Фамилия'
+    )
+    avatar = models.ImageField(
+        upload_to='avatar/',
+        verbose_name='Аватар'
     )
     specialization = models.CharField(
         max_length=200,
@@ -55,7 +59,7 @@ class IntroductionBanner(models.Model):
         max_length=255,
         verbose_name='Заголовок'
     )
-    cv_resume = models.URLField(
+    cv_resume = models.FileField(
         verbose_name='URL резюме',
         blank=True, null=True
     )
@@ -163,7 +167,7 @@ class Resume(models.Model):
     )
     description = models.CharField(
         max_length=300,
-        verbose_name='Главный заголовок'
+        verbose_name='Главное описание'
     )
     
     def __str__(self):
@@ -212,3 +216,99 @@ class ResumeInline(models.Model):
         verbose_name = 'Доп. информация'
         verbose_name_plural = 'Доп. информация'
     
+class FavouriteTools(models.Model):
+    icon = models.ImageField(
+        upload_to='tools/',
+        verbose_name='Иконка'
+    )
+    title = models.CharField(
+        max_length=255,
+        verbose_name='Название'
+    )
+    
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = 'Инструмент'
+        verbose_name_plural = 'Инструменты'
+        
+class Testimonials(models.Model):
+    main_title = models.CharField(
+        max_length=255,
+        verbose_name='Главный заголовок'
+    )
+    
+    def __str__(self):
+        return self.main_title
+    
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+        
+class TestimonialsInline(models.Model):
+    tesimonials = models.ForeignKey(
+        Testimonials, on_delete=models.CASCADE,
+        related_name='tesimonials'
+    )
+    image = models.ImageField(
+        upload_to='tesimonial/',
+        verbose_name='Фото user'
+    )
+    fullname = models.CharField(
+        max_length=255,
+        verbose_name='Полное имя'
+    )
+    position = models.CharField(
+        max_length=255,
+        verbose_name='Позиция'
+    )
+    company = models.CharField(
+        max_length=255,
+        verbose_name='Название компании'
+    )
+    url_company = models.URLField(
+        verbose_name='Ссылка на сайт',
+        blank=True, null=True
+    )
+    comment = models.TextField(
+        verbose_name='Комментарий',
+        blank=True, null=True
+    )
+    
+    def __str__(self):
+        return f"{self.fullname} - {self.comment}"
+    
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+        
+        
+class Contact(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Имя'
+    )
+    company = models.CharField(
+        max_length=255,
+        verbose_name='название компании'
+    )
+    email = models.EmailField(
+        verbose_name='Почта',
+        blank=True, null=True
+    )
+    phone = models.CharField(
+        max_length=23,
+        verbose_name='Номер телефона'
+    )
+    message = models.CharField(
+        max_length=500,
+        verbose_name='доп. информация'
+    )
+    
+    def __str__(self):
+        return f"{self.name} - {self.message}"
+    
+    class Meta:
+        verbose_name = 'Заявка на звонок'
+        verbose_name_plural = 'Заявки на звонок'
