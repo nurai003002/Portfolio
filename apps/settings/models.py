@@ -312,3 +312,4 @@ class Contact(models.Model):
     class Meta:
         verbose_name = 'Заявка на звонок'
         verbose_name_plural = 'Заявки на звонок'
+        

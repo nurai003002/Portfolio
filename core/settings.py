@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'apps.settings'
+    'apps.settings',
+    'apps.telegram_bot'
 ]
 
 MIDDLEWARE = [

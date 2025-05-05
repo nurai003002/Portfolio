@@ -669,14 +669,9 @@
                 <span class="reply__text">Thanks for your message. I'll get back as soon as possible.</span>
               </div> 
               <!-- Reply Messages End -->
-
               <!-- Contact Form Start -->
               <form class="form contact-form" id="contact-form" method="POST">
                 {% csrf_token %}
-                <!-- Hidden Required Fields -->
-                <input type="hidden" name="project_name" value="Starter Template">
-                <input type="hidden" name="admin_email" value="support@mixdesign.club">
-                <input type="hidden" name="form_subject" value="Contact Form Message">
                 <!-- END Hidden Required Fields-->
                 <div class="container-fluid p-0">
                   <div class="row gx-0">
@@ -696,7 +691,7 @@
                       <textarea name="message" placeholder="A Few Words*" required></textarea>
                     </div>
                     <div class="col-12 form__item animate-in-up">
-                      <button class="btn btn-default btn-hover btn-hover-accent" type="submit">
+                      <button name="contact_form" value="1" class="btn btn-default btn-hover btn-hover-accent" type="submit">
                         <span class="btn-caption">Send Message</span>
                         <i class="ph-bold ph-paper-plane-tilt"></i>
                       </button>
@@ -705,7 +700,6 @@
                 </div>
               </form>
               <!-- Contact Form End -->
-
             </div>
           </div>
           <!-- Content Block - Contact Form End -->
@@ -838,7 +832,6 @@
               </div>
             </div>
           </div>
-
             <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
               <div class="pswp__share-tooltip"></div>
             </div>

@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from apps.settings import models
 # Register your models here.
+from django.contrib.auth.models import User,Group
+# Register your models here.
 
 class ResumeInlineTabularInline(admin.TabularInline):
     model = models.ResumeInline
@@ -48,3 +50,7 @@ class TestimonialsAdmin(admin.ModelAdmin):
 @admin.register(models.Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
+ 
+# ungroup   
+admin.site.unregister(User)
+admin.site.unregister(Group)
