@@ -2,7 +2,7 @@
 
 
 # Подождите, пока база данных будет доступна
-until nc -z -v -w30 db_renx 5432
+until nc -z -v -w30 db_portfolio 5432
 do
   echo "Waiting for database connection..."
   sleep 5
