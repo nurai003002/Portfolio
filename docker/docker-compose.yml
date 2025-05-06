@@ -1,0 +1,48 @@
+version: '3.8'
+
+networks:
+  portfolio_network:
+    driver: bridge
+
+services:
+  db_portfolio:
+    image: postgres:15
+    env_file: ../.env
+    volumes:
+      - postgres_data_portfolio:/var/lib/postgresql/data
+    networks:
+      - portfolio_network
+
+  web_portfolio:
+    build:
+      context: ..
+      dockerfile: Dockerfile.server
+    command: gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:5005 --reload
+    volumes:
+      - ../:/app
+    env_file:
+      - ../.env
+    depends_on:
+      - db_portfolio
+    expose:
+      - "5005"
+    ports:
+      - "5005:5005"
+    networks:
+      - portfolio_network
+
+  nginx_portfolio: # Выводим nginx_portfolio на верхний уровень
+    image: nginx:latest
+    ports:
+      - "5001:80"  # Пробрасываем только порт 80 наружу
+    volumes:
+      - ../nginx/nginx.server.conf:/etc/nginx/nginx.conf:ro
+      - ../static:/app/static
+      # - ./staticfiles:/app/staticfiles
+      - ../media:/app/media
+    depends_on:
+      - web_portfolio
+    networks:
+      - portfolio_network
+volumes:
+  postgres_data_portfolio:
