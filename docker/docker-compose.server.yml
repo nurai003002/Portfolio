@@ -34,7 +34,7 @@ services:
   nginx_portfolio: # Выводим nginx_portfolio на верхний уровень
     image: nginx:latest
     ports:
-      - "5001:80"  # Пробрасываем только порт 80 наружу
+      - "5002:80"  # Пробрасываем только порт 80 наружу
     volumes:
       - ../nginx/nginx.server.conf:/etc/nginx/nginx.conf:ro
       - ../static:/app/static
