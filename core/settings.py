@@ -125,6 +125,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://nportoflio.webtm.ru',
+    'http://localhost'
+]
+
+CSRF_COOKIE_DOMAIN = None
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
