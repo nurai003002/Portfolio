@@ -126,7 +126,7 @@ USE_I18N = True
 USE_TZ = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://nportoflio.webtm.ru',
+    'https://nportfolio.webtm.ru',
     'http://localhost'
 ]
 
